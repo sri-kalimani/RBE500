@@ -1,0 +1,8 @@
+prefix=/home/tabby/RBE500/devel
+
+Name: scara_kinematics
+Description: Description of scara_kinematics
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
