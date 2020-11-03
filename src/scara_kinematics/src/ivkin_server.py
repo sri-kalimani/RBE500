@@ -2,14 +2,19 @@
 import rospy
 from geometry_msgs.msg import Quaternion, Pose, Vector3
 from scara_kinematics.srv import Ivkin, IvkinResponse
+import math as m
+
+lx=1 
+lz=1
+l2=1
 
 def handle_ivkin(req):
     print ("in handler")
     joints = Vector3()
     pose = req.pose.position
-    joints.x = pose.x + 2
-    joints.y = pose.y + 5
-    joints.z = pose.z + 1
+    joints.y = m.acos((pose.x**2 + pose.y**2 - lx**2 - l2**2)/2)
+    joints.x = m.atan2(pose.y, pose.x) - m.atan2(l2*m.sin(joints.y), lx+l2+m.cos(joints.y))
+    joints.z = lz-pose.z
     print (joints)
     return IvkinResponse(joints)
 
