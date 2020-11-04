@@ -1,15 +1,20 @@
 <launch>
 	
 	<arg name = "rvizconfig" default="$(find scara_kinematics)/rviz/urdf.rviz"/>
-	<arg name="model" default="$(find scara_kinematics)/urdf/arm.urdf"/>
+	<arg name="my_model" default="$(find scara_kinematics)/urdf/arm.urdf"/>
+	<arg name="use_gui_arg" default = "true"/>
 	
-  	<param name="use_gui" value="true"/>
-	<param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  	<param name="use_gui" value="$(arg use_gui_arg)"/>
+	<param name="robot_description" command="$(find xacro)/xacro.py $(arg my_model)" />
 
 	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
- 	 <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+ 	<node name="robot_state_publisher_rviz" pkg="robot_state_publisher" type="state_publisher" />
 
 	<node name = "rviz" pkg= "rviz" type = "rviz" args = "-d $(arg rvizconfig)" required = "true" />
+	<include file="$(find urdf_sim_tutorial)/launch/gazebo.launch">
+	    <arg name="gui" value="$(arg use_gui_arg)" />
+	    <arg name="model" value="$(arg my_model)" />
+	  </include>
 
 </launch>
 
