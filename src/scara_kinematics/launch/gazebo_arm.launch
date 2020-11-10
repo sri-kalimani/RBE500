@@ -6,7 +6,9 @@
   <arg name="gui" default="true"/>
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
-  <arg name="model" default="$(find urdf_tutorial)/urdf/08-macroed.urdf.xacro"/>
+  <arg name="model" default="$(find scara_kinematics)/urdf/arm_gazebo.urdf"/>
+  <arg name="use_clock_frequency" default = "false"/>
+  <arg name="pub_clock_frequency" default = "100"/>
 
   <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -15,13 +17,15 @@
     <arg name="paused" value="$(arg paused)"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
+    <arg name="use_clock_frequency" value = "$(arg use_clock_frequency)"/>
+    <arg name="pub_clock_frequency" value = "$(arg pub_clock_frequency)"/>
   </include>
 
   <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
 
   <!-- push robot_description to factory and spawn robot in gazebo -->
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
-        args="-z 1.0 -unpause -urdf -model robot -param robot_description" respawn="false" output="screen" />
+        args="-z 1.0 -unpause -urdf -model test_arm -param robot_description" respawn="false" output="screen" />
 
   <node pkg="robot_state_publisher" type="robot_state_publisher"  name="robot_state_publisher">
     <param name="publish_frequency" type="double" value="30.0" />

@@ -1,0 +1,21 @@
+<launch>
+	
+	<arg name = "rvizconfig" default="$(find scara_kinematics)/rviz/urdf.rviz"/>
+	<arg name="rviz_model" default="$(find scara_kinematics)/urdf/arm_rviz.urdf"/>
+	<arg name="gazebo_model" default="$(find scara_kinematics)/urdf/arm_gazebo.urdf"/>
+	<arg name="use_gui_arg" default = "true"/>
+
+	<node name="kinematics_control" pkg="scara_kinematics" type="kinematics.py"/>
+
+
+
+	<include file="$(find scara_kinematics)/launch/gazebo_arm.launch">
+	    <arg name="gui" value="$(arg use_gui_arg)" />
+	    <arg name="model" value="$(arg gazebo_model)" />
+	    <arg name="use_clock_frequency" value = "true"/>
+	    <arg name="pub_clock_frequency" value = "1"/>
+	  </include>
+	<include file="$(find MYROBOT_control)/launch/arm_control.launch"/>
+
+</launch>
+
