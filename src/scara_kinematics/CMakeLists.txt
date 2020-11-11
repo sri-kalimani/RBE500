@@ -60,6 +60,9 @@ find_package(catkin REQUIRED COMPONENTS
  add_service_files(
    FILES
    Ivkin.srv
+   Forkin.srv
+   MoveToJoints.srv
+   MoveToPoint.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -163,9 +166,10 @@ include_directories(
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
  catkin_install_python(PROGRAMS
-   src/kinematics.py
-	 src/ivkin_server.py
-	 src/ivkin_client.py
+   src/forward_kinematics.py
+   src/ivkin_server.py
+   src/ivkin_client.py
+   src/gazebo_kinematics_interface.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
