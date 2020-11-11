@@ -32,9 +32,9 @@ class forward_kinematics:
         lz = 2
         l2 = 1
         forkin_pose = Pose()
-        forkin_pose.position.x = m.cos(q1) + m.cos(q1) * m.cos(q2) - m.sin(q1) * m.sin(q2)
-        forkin_pose.position.y = m.sin(q1) + m.cos(q1) * m.sin(q2) - m.sin(q1) * m.cos(q2)
-        forkin_pose.position.z = 1 - q3
+        forkin_pose.position.x = lx*m.cos(q1) + l2*m.cos(q1) * m.cos(q2) - l2*m.sin(q1) * m.sin(q2)
+        forkin_pose.position.y = lx*m.sin(q1) + l2*m.cos(q1) * m.sin(q2) - l2*m.sin(q1) * m.cos(q2)
+        forkin_pose.position.z = lz - q3
         phi=2*atan(tan(q1/2 + q2/2))
         forkin_pose.orientation.x = cos(phi / 2)
         forkin_pose.orientation.y = sin(phi / 2)
