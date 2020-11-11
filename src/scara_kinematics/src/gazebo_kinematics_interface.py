@@ -32,7 +32,7 @@ class GazeboKinematicsInterface:
 
         #Motion service setup
         self.MoveToJoints_service = rospy.Service('move_to_joints', MoveToJoints, self.move_to_joints)
-        self.MoveToPoint_service = rospy.Service('move_to_point', MoveToPoint)
+        self.MoveToPoint_service = rospy.Service('move_to_point', MoveToPoint, self.move_to_point)
 
         self.acceptable_bounds = [0.0, 0.0, 0.0]
         ####get params!!!!

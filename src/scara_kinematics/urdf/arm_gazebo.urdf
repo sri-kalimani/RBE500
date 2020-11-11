@@ -1,0 +1,162 @@
+
+<robot name = "test_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+ 	<link name = "base_link">
+ 		<visual>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<cylinder length="2" radius = "0.1" />
+			</geometry>
+			    <material name="silver">
+				<color rgba="0.75 0.75 0.75 1"/>
+			    </material>
+		</visual>
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = ".01"/>
+			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+		</inertial>
+	</link>
+	<link name = "base_extension">
+ 		<visual>
+			<origin xyz = "0.5 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size ="1 .1 .1" />
+			</geometry>
+			    <material name="silver">
+				<color rgba="0.75 0.75 0.75 1"/>
+			    </material>
+		</visual>
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = ".01"/>
+			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+		</inertial>
+	</link>
+	
+	<link name= "middle_link">
+		<visual>
+			<origin xyz = ".5 0 0" rpy = "0 0 0"/>
+			<geometry>
+				<box size = "1 .1 .1" />
+			</geometry>
+			    <material name="silver">
+				<color rgba="0.75 0.75 0.75 1"/>
+			    </material>
+		</visual>
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = ".01"/>
+			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+		</inertial>
+	</link>
+
+	<link name= "end_link">
+		<visual>
+			<origin xyz = "0 0 -0.5" rpy = "0 0 0"/>
+			<geometry>
+				<box size = ".1 .1 1" />
+			</geometry>
+			    <material name="silver">
+				<color rgba="0.75 0.75 0.75 1"/>
+			    </material>
+		</visual>
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = ".01"/>
+			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+		</inertial>
+	</link>
+
+	
+
+	<link name ="dummy_rotation_link">
+		<inertial>
+			<origin xyz = "0 0 0" rpy = "0 0 0"/>
+			<mass value = ".01"/>
+			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+		</inertial>
+	</link>
+
+	<link name = "world"/>
+
+	<joint name = "theta_1" type = "revolute">
+		<parent link = "base_link"/>
+		<child link = "base_extension"/>
+		<origin xyz = "0 0 1"/>
+		<axis xyz = "0 0 1"/>
+		<limit effort="100" velocity="0.3" lower="-1.6" upper="1.6"/>
+	</joint>
+
+	<joint name = "theta_2" type = "continuous">
+		<parent link = "base_extension"/>
+		<child link = "middle_link"/>
+		<origin xyz = "1 0 0"/>
+		<axis xyz = "0 0 1"/>
+		<limit effort="100" velocity="0.3" lower="-1.6" upper="1.6"/>
+	</joint>
+
+	<joint name = "d_3" type = "prismatic">
+		<parent link = "dummy_rotation_link"/>
+		<child link = "end_link"/>
+		<origin xyz = "1.0 0 0.5"/>
+		<axis xyz = "0 0 1"/>
+		<limit effort="100" velocity=".3" lower="-0.5" upper="0.5"/>
+	</joint>
+
+	<joint name = "dummy_rotation" type = "revolute">
+		<parent link = "middle_link"/>
+		<child link = "dummy_rotation_link"/>
+		<origin xyz = "0 0 0"/>
+		<axis xyz = "1 0 0"/>
+		<limit effort="100" velocity="1.0" lower="3.141592653589793238462643383279502884197" upper="3.141592653589793238462643383279502884197"/>
+	</joint>
+
+	<joint name = "fixture" type= "fixed">
+		<parent link = "world"/>
+		<child link = "base_link"/>
+	</joint>
+
+	
+
+	<gazebo>
+	  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+	    <robotNamespace>/test_arm</robotNamespace>
+	  </plugin>
+
+	</gazebo>
+
+	<transmission name="theta_1">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="theta_1">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="theta_1_motor">
+			<mechanicalReduction>1</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+	
+	<transmission name="theta_2">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="theta_2">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="theta_2_motor">
+			<mechanicalReduction>1</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+
+	<transmission name="d_3">
+		<type>transmission_interface/SimpleTransmission</type>
+		<joint name="d_3">
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</joint>
+		<actuator name="d_3_motor">
+			<mechanicalReduction>1</mechanicalReduction>
+			<hardwareInterface>EffortJointInterface</hardwareInterface>
+		</actuator>
+	</transmission>
+
+</robot>

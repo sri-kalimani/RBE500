@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 import rospy
 from geometry_msgs.msg import Quaternion, Pose, Vector3
-from scara_kinematics.srv import Ivkin, IvkinResponse
+from scara_kinematics.srv import Ivkin, IvkinResponse, Forkin
 import math as m
+from tf.transformations import *
+from numpy.linalg import pinv
 
-lx=1 
-lz=1
+
+lx=1
+lz=2
 l2=1
 
 def handle_ivkin(req):
