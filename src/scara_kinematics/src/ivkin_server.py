@@ -15,7 +15,7 @@ def handle_ivkin(req):
     print ("in handler")
     joints = Vector3()
     pose = req.pose.position
-    joints.y = m.acos((pose.x**2 + pose.y**2 - lx**2 - l2**2)/2)
+    joints.y = m.acos((pose.x**2 + pose.y**2 - lx**2 - l2**2)/(2*lx*l2))
     joints.x = m.atan2(pose.y, pose.x) - m.atan2(l2*m.sin(joints.y), lx+l2+m.cos(joints.y))
     joints.z = lz-pose.z
     print (joints)
