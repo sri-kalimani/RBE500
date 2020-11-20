@@ -63,6 +63,7 @@ find_package(catkin REQUIRED COMPONENTS
    Forkin.srv
    MoveToJoints.srv
    MoveToPoint.srv
+   MoveRobot.srv
  )
 
 ## Generate actions in the 'action' folder

@@ -11,7 +11,7 @@ import csv
 class PDController:
     """PID Controller"""
 
-    def __init__(self, P=0.4, D=0):
+    def __init__(self, P=100, D=10):
         rospy.init_node('PDController')
 
         self.Kp = P
@@ -23,7 +23,7 @@ class PDController:
         self.current_time = time.time()
         self.last_time = self.current_time
 
-        rate = rospy.Rate(2)
+        rate = rospy.Rate(1)
 
         rospy.wait_for_service('/gazebo/get_joint_properties')
         rospy.wait_for_service('/gazebo/apply_joint_effort')
@@ -43,7 +43,7 @@ class PDController:
         goalZ = req.ref
         currZ = 0
 
-        while (currZ <= goalZ - 0.2 or currZ >= goalZ + 0.2):
+        while (currZ <= goalZ - 0.02 or currZ >= goalZ + 0.02):
             try:
                 currPos = rospy.ServiceProxy('/gazebo/get_joint_properties', GetJointProperties)
                 resp = currPos(joint_name)
@@ -55,7 +55,7 @@ class PDController:
             self.setSetPoint(goalZ)
             effort = float(self.update(currZ))
 
-            self.set_effort(joint_name, effort, rospy.Time(0), rospy.Time(1))
+            self.set_effort(joint_name,effort , rospy.Time(0), rospy.Time(1))
             with open('output.txt', 'w') as csvfile:
                 self.csvwriter = csv.writer(csvfile, delimiter=' ')
                 fields = [goalZ, currZ, rospy.Time()]
@@ -87,9 +87,8 @@ class PDController:
         delta_error = error - self.last_error
 
         if (delta_time >= self.sample_time):
-            self.PTerm = self.Kp * error
+            self.PTerm = self.Kd*error
 
-            self.DTerm = 0.0
             if delta_time > 0:
                 self.DTerm = delta_error / delta_time
 

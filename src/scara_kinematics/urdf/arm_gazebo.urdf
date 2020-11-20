@@ -63,8 +63,8 @@
 		</visual>
 		<inertial>
 			<origin xyz = "0 0 0" rpy = "0 0 0"/>
-			<mass value = ".01"/>
-			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+			<mass value = "1"/>
+			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0.01" iyz="0" izz="0.01" />
 		</inertial>
 	</link>
 
@@ -80,7 +80,7 @@
 
 	<link name = "world"/>
 
-	<joint name = "theta_1" type = "revolute">
+	<joint name = "theta_1" type = "fixed">
 		<parent link = "base_link"/>
 		<child link = "base_extension"/>
 		<origin xyz = "0 0 1"/>
@@ -88,7 +88,7 @@
 		<limit effort="100" velocity="0.3" lower="-1.6" upper="1.6"/>
 	</joint>
 
-	<joint name = "theta_2" type = "continuous">
+	<joint name = "theta_2" type = "fixed">
 		<parent link = "base_extension"/>
 		<child link = "middle_link"/>
 		<origin xyz = "1 0 0"/>
