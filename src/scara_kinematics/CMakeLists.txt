@@ -170,6 +170,8 @@ include_directories(
    src/ivkin_server.py
    src/ivkin_client.py
    src/gazebo_kinematics_interface.py
+   src/PDController.py
+   src/move_robot_srv.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 

@@ -7,7 +7,7 @@
 
 	<node name="forward_kinematics" pkg="scara_kinematics" type="forward_kinematics.py"/>
 	<node name="invkin_server" pkg="scara_kinematics" type="ivkin_server.py"/>
-	<node name="gazebo_kin_interface" pkg="scara_kinematics" type="gazebo_kinematics_interface.py"/>
+	<!--node name="gazebo_kin_interface" pkg="scara_kinematics" type="gazebo_kinematics_interface.py"/-->
 
 
 	<include file="$(find scara_kinematics)/launch/gazebo_arm.launch">
