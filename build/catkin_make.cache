@@ -1,0 +1,2 @@
+MYROBOT_control:scara_kinematics
+-DCATKIN_DEVEL_PREFIX=/home/ben/RBE500/devel -DCMAKE_INSTALL_PREFIX=/home/ben/RBE500/install -G Unix Makefiles

@@ -1,0 +1,2 @@
+set(scara_kinematics_MESSAGE_FILES "")
+set(scara_kinematics_SERVICE_FILES "/home/ben/RBE500/src/scara_kinematics/srv/Ivkin.srv;/home/ben/RBE500/src/scara_kinematics/srv/Forkin.srv;/home/ben/RBE500/src/scara_kinematics/srv/MoveToJoints.srv;/home/ben/RBE500/src/scara_kinematics/srv/MoveToPoint.srv;/home/ben/RBE500/src/scara_kinematics/srv/MoveRobot.srv;/home/ben/RBE500/src/scara_kinematics/srv/MoveRobot_3.srv")
