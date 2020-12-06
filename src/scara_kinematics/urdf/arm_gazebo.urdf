@@ -14,7 +14,7 @@
 		<inertial>
 			<origin xyz = "0 0 0" rpy = "0 0 0"/>
 			<mass value = ".01"/>
-			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+			<inertia ixx="0"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
 		</inertial>
 	</link>
 	<link name = "base_extension">
@@ -30,7 +30,7 @@
 		<inertial>
 			<origin xyz = "0 0 0" rpy = "0 0 0"/>
 			<mass value = ".01"/>
-			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+			<inertia ixx="0"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
 		</inertial>
 	</link>
 	
@@ -47,15 +47,15 @@
 		<inertial>
 			<origin xyz = "0 0 0" rpy = "0 0 0"/>
 			<mass value = ".01"/>
-			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
+			<inertia ixx="0"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
 		</inertial>
 	</link>
 
 	<link name= "end_link">
 		<visual>
-			<origin xyz = "0 0 -0.5" rpy = "0 0 0"/>
+			<origin xyz = "0 0 -1" rpy = "0 0 0"/>
 			<geometry>
-				<box size = ".1 .1 1" />
+				<box size = ".1 .1 2" />
 			</geometry>
 			    <material name="silver">
 				<color rgba="0.75 0.75 0.75 1"/>
@@ -63,8 +63,8 @@
 		</visual>
 		<inertial>
 			<origin xyz = "0 0 0" rpy = "0 0 0"/>
-			<mass value = "1"/>
-			<inertia ixx=".01"  ixy="0"  ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+			<mass value = ".1"/>
+			<inertia ixx="0"  ixy="0"  ixz="0" iyy="0" iyz="0" izz="0" />
 		</inertial>
 	</link>
 
@@ -80,28 +80,28 @@
 
 	<link name = "world"/>
 
-	<joint name = "theta_1" type = "fixed">
+	<joint name = "theta_1" type = "revolute">
 		<parent link = "base_link"/>
 		<child link = "base_extension"/>
 		<origin xyz = "0 0 1"/>
 		<axis xyz = "0 0 1"/>
-		<limit effort="100" velocity="0.3" lower="-1.6" upper="1.6"/>
+		<limit effort="100" velocity="0.3" lower="-3.14159" upper="3.13159"/>
 	</joint>
 
-	<joint name = "theta_2" type = "fixed">
+	<joint name = "theta_2" type = "revolute">
 		<parent link = "base_extension"/>
 		<child link = "middle_link"/>
 		<origin xyz = "1 0 0"/>
 		<axis xyz = "0 0 1"/>
-		<limit effort="100" velocity="0.3" lower="-1.6" upper="1.6"/>
+		<limit effort="100" velocity="0.3" lower="-3.14159" upper="3.14159"/>
 	</joint>
 
 	<joint name = "d_3" type = "prismatic">
 		<parent link = "dummy_rotation_link"/>
 		<child link = "end_link"/>
-		<origin xyz = "1.0 0 0.5"/>
+		<origin xyz = "1.0 0 1"/>
 		<axis xyz = "0 0 1"/>
-		<limit effort="100" velocity=".3" lower="-0.5" upper="0.5"/>
+		<limit effort="100" velocity=".3" lower="-1" upper="1"/>
 	</joint>
 
 	<joint name = "dummy_rotation" type = "revolute">

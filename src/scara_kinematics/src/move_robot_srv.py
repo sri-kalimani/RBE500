@@ -17,4 +17,4 @@ def mvr_client(ref):
         print("Service failed")
 
 if __name__=="__main__":
-    print(mvr_client(-.3))
+    print(mvr_client(1))

@@ -14,7 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   geometry_msgs
   message_generation
-)
+  )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -64,6 +64,7 @@ find_package(catkin REQUIRED COMPONENTS
    MoveToJoints.srv
    MoveToPoint.srv
    MoveRobot.srv
+   MoveRobot_3.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -173,6 +174,8 @@ include_directories(
    src/gazebo_kinematics_interface.py
    src/PDController.py
    src/move_robot_srv.py
+   src/3_move_robot_srv.py
+   src/3_PDController.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
