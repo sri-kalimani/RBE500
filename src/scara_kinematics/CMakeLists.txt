@@ -64,6 +64,8 @@ find_package(catkin REQUIRED COMPONENTS
    MoveToJoints.srv
    MoveToPoint.srv
    MoveRobot.srv
+   JointSpaceVelocities.srv
+   TaskSpaceVelocities.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -173,6 +175,11 @@ include_directories(
    src/gazebo_kinematics_interface.py
    src/PDController.py
    src/move_robot_srv.py
+   src/CalcJointVel_client.py
+   src/CalcJointVel.py
+   src/CalcTaskVel_client.py
+   src/CalcTaskVel.py
+
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
