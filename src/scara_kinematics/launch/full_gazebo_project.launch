@@ -8,6 +8,13 @@
 	<!--node name="forward_kinematics" pkg="scara_kinematics" type="forward_kinematics.py"/-->
 	<!--node name="invkin_server" pkg="scara_kinematics" type="ivkin_server.py"/-->
 	<!--node name="gazebo_kin_interface" pkg="scara_kinematics" type="gazebo_kinematics_interface.py"/-->
+	<node name ="PDController" pkg="scara_kinematics" type="PDController.py"/>
+	<node name ="3_move_robot_srv" pkg="scara_kinematics" type="3_move_robot_srv.py"/>
+	<node name ="3_PDController" pkg="scara_kinematics" type="3_PDController.py"/>
+	<node name ="CalcJointVel" pkg="scara_kinematics" type="CalcJointVel.py"/>
+	<node name ="CalcJointVel_client" pkg="scara_kinematics" type="CalcJointVel_client.py"/>
+	<node name ="CalcTaskVel" pkg="scara_kinematics" type="CalcTaskVel.py"/>
+	<node name ="CalcTaskVel_client" pkg="scara_kinematics" type="CalcTaskVel_client.py"/>
 
 
 	<include file="$(find scara_kinematics)/launch/gazebo_arm.launch">
