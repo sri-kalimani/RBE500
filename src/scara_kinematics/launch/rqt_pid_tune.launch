@@ -1,0 +1,19 @@
+<launch>
+	
+	<arg name="theta_1" default="false"	/>
+	<arg name="theta_2" default="false"/>	
+	<arg name="d_3" default="false"/>	
+	
+	<group if="$(arg theta_1)">
+		<node name="PID_tuner_theta_1" pkg="rqt_gui" type="rqt_gui" respawn="false" output="screen" args="--perspective-file $(find scara_kinematics)/launch/PID_rqt_perspectives/theta_1.perspective"/>
+	</group>
+
+	<group if="$(arg theta_2)">
+		<node name="PID_tuner_theta_2" pkg="rqt_gui" type="rqt_gui" respawn="false" output="screen" args="--perspective-file $(find scara_kinematics)/launch/PID_rqt_perspectives/theta_2.perspective"/>
+	</group>
+
+	<group if="$(arg d_3)">
+		<node name="PID_tuner_d_3" pkg="rqt_gui" type="rqt_gui" respawn="false" output="screen" args="--perspective-file $(find scara_kinematics)/launch/PID_rqt_perspectives/d_3.perspective"/>
+	</group>
+
+</launch>
