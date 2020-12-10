@@ -65,6 +65,8 @@ find_package(catkin REQUIRED COMPONENTS
    MoveToPoint.srv
    MoveRobot.srv
    MoveRobot_3.srv
+   JointSpaceVelocities.srv
+   TaskSpaceVelocities.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -176,6 +178,10 @@ include_directories(
    src/move_robot_srv.py
    src/3_move_robot_srv.py
    src/3_PDController.py
+   src/CalcJointVel.py
+   src/CalcJointVel_client.py
+   src/CalcTaskVel.py
+   src/CalcTaskVel_client.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
